@@ -168,12 +168,16 @@ def stop():
 		current_playing.pop().kill()
 	return "{'stop':true}"
 
+import os
 @route("/say",["GET"])
 def say(text="Bonjour"):
 	try:
-		url = ["http://translate.google.com/translate_tts?tl=fr&q={0}".format(urllib.quote(text[0]))]
-		current_playing.append(subprocess.Popen(args.player+url, shell=False))
-		return "{'say':true}"
+		url = ["http://dict.youdao.com/dictvoice?audio={0}".format(urllib.quote(text[0]))]
+		# return url
+		# os.system('start '+url[0])
+		return '''<script>
+new Audio(%s).play()
+		</script>'''% url
 	except Exception as e:
 		return "{'say':false}"
 
