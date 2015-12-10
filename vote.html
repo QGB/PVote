@@ -4,39 +4,105 @@
 <title>PVote</title>
 <link rel="stylesheet" href="./DEMO_files/reset.css" media="screen">
 <link rel="stylesheet" href="./DEMO_files/style.css" media="screen">
-<link rel="stylesheet" href="./DEMO_files/css3_3d.css" media="screen">
-
 </head>
 
-<body>
+<body>	
+	<div style="text-align:center;clear:both;color:yellow;font-size:200%;" >
+	You Have Voted No.{id}</div>
+	<img src="{img}" style="filter:alpha(Opacity=20)" 
+     onMouseOver="CssFilter('add')" onMouseOut="CssFilter('dec')">
+	
+	<div style="text-align:center;clear:both;font-size:100%;" >
+	{des}</div>
+	
+	<a href="./result" class="button">Vhat is Result</a>
+	
+	<script>
+	function CssFilter(n)
+		{
+			alert(img)
+		  if(n=="add") //如果传入的参数为add，则将图片的不透明度增大
+		  if(img.filters.alpha.Opacity < 100)
+		  {
+			 img.filters.alpha.Opacity += 5;
+			 setTimeout("CssFilter('add')",20);
+		  }
+		  if(n=="dec") //如果传入的参数为dec，则将图片的不透明度降低
+		  if(img.filters.alpha.Opacity > 20)
+		  {
+			 img.filters.alpha.Opacity -= 5;
+			 setTimeout("CssFilter('dec')",20);
+		  }
+		}</script>
 
-	<div id="container">
-	<div style="text-align:center;clear:both;color:yellow;font-size:200%;" >Click Image To Vote	</div>
+	<style type="text/css">
+		img{display:block; margin:0 auto;
+		opacity: 0.88;
+		border: solid 5px yellow;//#553c54;
+		border-radius: 9px;  
+		box-shadow: inset 0 1px 5px rgba(0,0,0,.5);
+	
+		}
+		a.button {
+		margin-top: 8%;
+		margin-left: 41%;
+		display: inline-block;
+		text-decoration: none;
+		font-family: 'PT Sans', arial, serif;
+		color:#ffffff;
+		font-size:24px;
+		font-weight:bold;
+		padding:15px;
+		text-shadow: /* Simulating Text Stroke */
+        -1px -1px 0 #000, 
+        1px -1px 0 #000, 
+        -1px 1px 0 #000, 
+        1px 1px 0 #000;
+	
+	border: 1px solid rgba(0,0,0,0.5);
+	border-bottom: 3px solid rgba(0,0,0,0.5);
+	
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	
+	background: rgba(0,0,0,0.25);
 
-  <ul id="grid" class="group">
-            <li>
-                <div class="details">
-                	<h3>Lanterns</h3>
-                    <a class="more" href="#info1">view details</a> 
-                </div>
-               <a class="more" href="#info1"><img src="./DEMO_files/lanterns.jpg"></a>
-            </li>
-        </ul>
-    </div>
+    -o-box-shadow: 
+        0 2px 8px rgba(0,0,0,0.5),
+        inset 0 1px rgba(255,255,255,0.3),
+        inset 0 10px rgba(255,255,255,0.2),
+        inset 0 10px 20px rgba(255,255,255,0.25),
+        inset 0 -15px 30px rgba(0,0,0,0.3);
 
+    -webkit-box-shadow: 
+        0 2px 8px rgba(0,0,0,0.5),
+        inset 0 1px rgba(255,255,255,0.3),
+        inset 0 10px rgba(255,255,255,0.2),
+        inset 0 10px 20px rgba(255,255,255,0.25),
+        inset 0 -15px 30px rgba(0,0,0,0.3);
 
+    -moz-box-shadow:
+        0 2px 8px rgba(0,0,0,0.5),
+        inset 0 1px rgba(255,255,255,0.3),
+        inset 0 10px rgba(255,255,255,0.2),
+        inset 0 10px 20px rgba(255,255,255,0.25),
+        inset 0 -15px 30px rgba(0,0,0,0.3);
+	
+	box-shadow: 
+        0 2px 8px rgba(0,0,0,0.5), /* Exterior Shadow */
+        inset 0 1px rgba(255,255,255,0.3), /* Top light Line */
+        inset 0 10px rgba(255,255,255,0.2), /* Top Light Shadow */
+        inset 0 10px 20px rgba(255,255,255,0.25), /* Sides Light Shadow */
+        inset 0 -15px 30px rgba(0,0,0,0.3); /* Dark Background */
+
+	}
+	</style>
+	
 </body>
 
 <script>
 var eles = document.getElementsByTagName("li");
-for (var i = 0; i < eles.length; i++) {
-	console.log(eles[i].attributes);
-	var as = eles[i].getElementsByTagName("a");
-	for (var ia = 0; ia < as.length; ia++) {	
-		as[ia].href="http://127.0.0.1/vote?id="+String(i);
-	}
-	
-	//eval("eles[i].onclick=function(){alert("+i+");}")
-}
+
 </script>
 </html>
