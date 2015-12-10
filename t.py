@@ -12,6 +12,11 @@ def ta(i=0):
 	U.pln(t)
 
 from threading import Thread
-for i in range(9999):
-	Thread(target=ta,args=[i]).start()
+# for i in range(9999):
+	# Thread(target=ta,args=[i]).start()
 # ta()
+
+import sqlite
+for i in range(77):
+	sqlite.exe('insert into v(vid) values(1)')
+sqlite.exe('65343f2')

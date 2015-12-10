@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*- 
 types='''html,htm,png,jpg,js,css,ttf,woff,cur'''.split(',')
 #cur got problem
 from extended_BaseHTTPServer import serve,route,redirect,override
@@ -19,10 +20,23 @@ def getdes(id):
 def index(**kwargs):
 	return redirect('/DEMO.html')
 	
-@route("/r",["GET",'POST'])
-def r(location="http://baidu.com"):
-	return {"content":"","code":301,"Location":location}
-
+@route("/result",["GET"])
+def result(id='9'):#必须提供默认参数，否则服务器内部错误，，，在隐身模式下表现最好
+	try:
+		id=id[0]
+		sid=int(id)+1;sid=str(sid)
+		sr=U.read(basedir+'/result.html')
+		# sr=sr.replace('{id}',sid)
+		# sr=sr.replace('{img}',getpath(id))
+		# sr=sr.replace('{des}',getdes(id))
+	except Exception as e:sr=e
+	# sr='6543'
+	return {
+	"content":sr,
+	"code":235,
+	"Cache-Control":"no-cache"
+	}	
+########################################
 @route("/vote",["GET",'POST'])
 def vote(id='Error!'):
 	id=id[0]
@@ -45,10 +59,13 @@ def vote(id='Error!'):
 sfr='''
 @route("/{0}",["GET"])
 def {1}():
+	sc="no-cache"
+	icode=235
+	if '{0}'.endswith('bg.jpg'):sc='max-age='+str(60*10)#增加读取文件判断有问题，复杂度提升
 	return {{
 	"content":U.read(basedir+'/{0}','rb'),
-	"code":235,
-	"Cache-Control":"no-cache"
+	"code":icode,
+	"Cache-Control":sc
 	}}
 '''
 def search(path):
