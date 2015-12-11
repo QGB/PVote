@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*- 
+basedir='.'
 types='''html,htm,png,jpg,js,css,ttf,woff,cur'''.split(',')
+simgfolder='DEMO_files'
 #cur got problem
 from extended_BaseHTTPServer import serve,route,redirect,override
 from qgb import U,T
-import os,sys;basedir=os.path.dirname(__file__)
-simgfolder='DEMO_files'
-gysimg=[]
+import os,sys#;basedir=os.path.dirname(__file__);
+import sqlite
+gysimg=[];gim=6;
 def getpath(id):
 	for i in gysimg:
 		if i[:1]==str(id):
@@ -15,7 +17,23 @@ def getdes(id):
 	for i in gysimg:
 		if i[:1]==str(id):
 			return i[1:][:-4]
-	
+sechtml='''<section class="box">
+<section class="col_1" title="{0}">{0}</section>
+<section class="col_2"><img src="{1}"  /></section>
+<section class="col_3">{2}</section>
+<section class="col_4">{3}</section>
+</section>'''
+def getsec():
+	dr={}
+	for i in range(gim):
+		dr[i]=sqlite.calc(i)
+	dr=U.sortDictV(dr)
+	sr='';n=0
+	for k,v in dr:
+		n+=1
+		sr+=sechtml.format(n,getpath(k),('No.%s '%(k+1))+getdes(k),v)
+	return sr
+
 @route("/",["GET"])
 def index(**kwargs):
 	return redirect('/DEMO.html')
@@ -26,9 +44,7 @@ def result(id='9'):#必须提供默认参数，否则服务器内部错误，，
 		id=id[0]
 		sid=int(id)+1;sid=str(sid)
 		sr=U.read(basedir+'/result.html')
-		# sr=sr.replace('{id}',sid)
-		# sr=sr.replace('{img}',getpath(id))
-		# sr=sr.replace('{des}',getdes(id))
+		sr=sr.replace('{sec}',getsec())
 	except Exception as e:sr=e
 	# sr='6543'
 	return {
@@ -42,7 +58,7 @@ def vote(id='Error!'):
 	id=id[0]
 	sid=int(id)+1;sid=str(sid)
 	####  Vote logic####
-	
+	sqlite.vote(id)
 	####################
 	sv=U.read(basedir+'/vote.html')
 	try:
@@ -85,10 +101,6 @@ def search(path):
 		elif os.path.isdir(fp):
 			search(fp)
 search(basedir)
-
-# print gysimg
-# print getpath(1),getdes(5)
-# U.x()
 
 ip="0.0.0.0";port=80
 U.pln(ip,port)

@@ -12,15 +12,16 @@ def execsql(sql):
 		cu =conn.cursor()
 		cu.execute(sql)
 		conn.commit()
-		print('{}'.format(sql))
+		if U.debug: print('{}'.format(sql))
 		return cu.fetchall()
 	except Exception as e:
 		print(e)
 exe=sql=execsql
 
 import time
-def insert(vid):#sql injection
-	if(vid<0 or vid>9):raise Exception('vid out of range '+vid)
+def vote(vid):#sql injection
+	vid=int(vid)
+	if(vid<0 or vid>9):raise Exception('vid %s out of range '%(vid))
 	exe('insert into v(vid,time) values(%s,%s)'%(vid,time.time()))
 
 def calc(vid):#sql injection
@@ -37,5 +38,5 @@ except:pass
 # execsql('insert into ta(t) values(1)')
 # insert into v(vid) values(1)
 # insert(1)
-# insert(2)
-calc(1)
+# vote(28)
+# calc(1)

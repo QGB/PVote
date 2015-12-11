@@ -126,9 +126,9 @@ a {
 	background-repeat:no-repeat; background-position:center center; background-size:40px 40px;
 }
 
-.col_1[title="1"]{ color:#fff; background-image:url(../images/r1.png); line-height:38px;}
-.col_1[title="2"]{ color:#fff; background-image:url(../images/r2.png); line-height:38px;}
-.col_1[title="3"]{ color:#fff;  background-image:url(../images/r3.png);line-height:38px;}
+.col_1[title="1"]{ color:#fff; background-image:url(../DEMO_files/r1.png); line-height:38px;}
+.col_1[title="2"]{ color:#fff; background-image:url(../DEMO_files/r2.png); line-height:38px;}
+.col_1[title="3"]{ color:#fff;  background-image:url(../DEMO_files/r3.png);line-height:38px;}
 .col_2 {
 	-webkit-box-flex: 1;
 	-moz-box-flex: 1;

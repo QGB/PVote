@@ -1,6 +1,16 @@
 from qgb import U,T,Clipboard
 from time import time,sleep
-import urllib2
+import urllib2,os
+
+
+def search(path):
+	for filename in os.listdir(path):
+		print filename
+
+search('.')
+U.x()
+
+
 def ta(i=0):
 	i=str(i)
 	t=time()
@@ -17,6 +27,24 @@ from threading import Thread
 # ta()
 
 import sqlite
-for i in range(77):
-	sqlite.exe('insert into v(vid) values(1)')
-sqlite.exe('65343f2')
+# for i in range(77):
+	# sqlite.exe('insert into v(vid) values(1)')
+# sqlite.exe('65343f2')
+def s(adict):
+	items = adict.items()
+	items.sort()
+	return [value for key, value in items]
+	
+d={}
+for i in range(7):
+	d[i]=i*i-5*i
+
+print d ,type(d)
+d=U.sortDictV(d)	
+
+for k,v in d:
+	print k
+# print d[0]
+U.x()
+
+print d ,type(d)
