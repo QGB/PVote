@@ -1,8 +1,12 @@
+import urllib2,os,sys
+sys.path.append('C:\\PVote\\')
 from qgb import U,T,Clipboard
 from time import time,sleep
-import urllib2,os
 
 
+exec('''if 'a' not  in dir():a=32''')
+print a
+U.x()
 def search(path):
 	for filename in os.listdir(path):
 		print filename

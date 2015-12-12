@@ -72,14 +72,18 @@ def vote(id='Error!'):
 	"code":235,
 	"Cache-Control":"no-cache"
 	}	
+dsf={}
 sfr='''
+# if 's{1}' not in dir():s{1}=U.read(basedir+'/{0}','rb')
+dsf['s{1}']=U.read(basedir+'/{0}','rb')
 @route("/{0}",["GET"])
 def {1}():
 	sc="no-cache"
 	icode=235
 	if '{0}'.endswith('bg.jpg'):sc='max-age='+str(60*10)#增加读取文件判断有问题，复杂度提升
+	
 	return {{
-	"content":U.read(basedir+'/{0}','rb'),
+	"content":dsf['s{1}'],
 	"code":icode,
 	"Cache-Control":sc
 	}}
