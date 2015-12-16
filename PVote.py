@@ -6,7 +6,7 @@ simgfolder='DEMO_files'
 from extended_BaseHTTPServer import serve,route,redirect,override
 from qgb import U,T
 import os,sys#;basedir=os.path.dirname(__file__);
-import sqlite
+import SQLite
 gysimg=[];gim=6;
 def getpath(id):
 	for i in gysimg:
@@ -26,7 +26,7 @@ sechtml='''<section class="box">
 def getsec():
 	dr={}
 	for i in range(gim):
-		dr[i]=sqlite.calc(i)
+		dr[i]=SQLite.calc(i)
 	dr=U.sortDictV(dr)
 	sr='';n=0
 	for k,v in dr:
@@ -58,7 +58,7 @@ def vote(id='Error!'):
 	id=id[0]
 	sid=int(id)+1;sid=str(sid)
 	####  Vote logic####
-	sqlite.vote(id)
+	SQLite.vote(id)
 	####################
 	sv=U.read(basedir+'/vote.html')
 	try:
