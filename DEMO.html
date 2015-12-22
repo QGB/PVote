@@ -68,7 +68,7 @@ for (var i = 0; i < eles.length; i++) {
 	console.log(eles[i].attributes);
 	var as = eles[i].getElementsByTagName("a");
 	for (var ia = 0; ia < as.length; ia++) {	
-		as[ia].href="http://127.0.0.1/vote?id="+String(i);
+		as[ia].href="/vote?id="+String(i);
 	}
 	
 	//eval("eles[i].onclick=function(){alert("+i+");}")
