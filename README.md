@@ -2,7 +2,7 @@
 ##A simple python web vote page use BaseHttpServer 
 ##简单web版投票系统
 
-###Install(need WShell)
+###Install(need [WShell](https://github.com/QGB/Wshell))
 ```
 ginit PVote
 cd qgb
