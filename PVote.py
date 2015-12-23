@@ -7,7 +7,7 @@ from extended_BaseHTTPServer import serve,route,redirect,override
 from qgb import U,T
 import os,sys#;basedir=os.path.dirname(__file__);
 import SQLite
-gysimg=[];gim=6;
+gysimg=[];gim=8;
 def getpath(id):
 	for i in gysimg:
 		if i[:1]==str(id):
@@ -54,7 +54,12 @@ def result(id='9'):#必须提供默认参数，否则服务器内部错误，，
 	}	
 ########################################
 @route("/vote",["GET",'POST'])
-def vote(id='Error!'):
+def vote(id='Error!',ip=''):
+	ip=ip[0]
+	if(SQLite.ip(ip)):
+		ip='<br><br><br>Warning: IP %s HAVE ALREADY VOTED'%ip
+	else:
+		ip=''
 	id=id[0]
 	sid=int(id)+1;sid=str(sid)
 	####  Vote logic####
@@ -64,7 +69,7 @@ def vote(id='Error!'):
 	try:
 		sv=sv.replace('{id}',sid)
 		sv=sv.replace('{img}',getpath(id))
-		sv=sv.replace('{des}',getdes(id))
+		sv=sv.replace('{des}',getdes(id)+ip)
 	except Exception as e:sv=e
 	
 	return {

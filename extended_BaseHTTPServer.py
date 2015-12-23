@@ -3,7 +3,7 @@ import logging
 import os
 from urlparse import urlparse,parse_qs
 from mimetypes import types_map
-
+from qgb import U,T
 register_route = {"GET":{},"POST":{}}
 def route(path="/", method=["GET"]):
 	def decorator(f):
@@ -40,6 +40,10 @@ class extended_BaseHTTPServer(BaseHTTPServer.BaseHTTPRequestHandler):
 	def do_GET(s):
 		o = urlparse(s.path)
 		arguments = parse_qs(o.query)
+		####ip 2015-12-23 09:51:25 qgb
+		if s.path[:5]=='/vote':
+			arguments['ip']=s.__dict__['client_address']
+			# U.msgbox(s.path)
 		s.do_routing(o, arguments, "GET")
 	
 	def do_routing(s, o, arguments, action):
